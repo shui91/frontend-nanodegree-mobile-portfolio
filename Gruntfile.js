@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		jshint: {
 			all: [
-				'Gruntfile.js', 'src/**/*.js', 'dist/**/*.js'
+				'Gruntfile.js', 'src/**/*.js'
 			]
 		},
 		pagespeed: {
