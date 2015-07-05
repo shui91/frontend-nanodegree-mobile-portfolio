@@ -426,6 +426,8 @@ var resizePizzas = function(size) {
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
     function changePizzaSizes (size) {
+      var newWidth;
+
       switch(size) {
         case "1":
           newWidth = 25;
@@ -502,13 +504,13 @@ function updatePositions() {
   var scrollTop = document.body.scrollTop;
   var scrolls = [];
   for (var i = 0; i < 5; i++){
-    scrolls[i] = Math.sin((scrollTop / 1250) + i)
+    scrolls[i] = Math.sin((scrollTop / 1250) + i);
   }
 
-  for (var i = 0; i < length; i++) {
-    var phase = scrolls[i % 5];
+  for (var j = 0; j < length; j++) {
+    var phase = scrolls[j % 5];
     //console.log(phase, phases);
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[j].style.left = items[j].basicLeft + 100 * phase + 'px';
     //items[i].style.transform = 'translateX(' + (700 * phase) + 'px)';
   }
 
@@ -529,7 +531,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var pizzaSpace = 300;
-  var movingPizzas = document.getElementById("movingPizzas");
+  var movingPizzas1 = document.getElementById("movingPizzas1");
   for (var i = 0; i < 35; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -538,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * pizzaSpace;
     elem.style.top = (Math.floor(i / cols) * pizzaSpace) + 'px';
-    movingPizzas.appendChild(elem);
+    movingPizzas1.appendChild(elem);
   }
   updatePositions();
 });
