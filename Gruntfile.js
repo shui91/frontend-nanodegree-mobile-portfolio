@@ -38,6 +38,14 @@ module.exports = function(grunt) {
 					src: '*.css',
 					dest: 'dist/css',
 					ext: '.min.css'
+				}]},
+			target2: {
+				files: [{
+					expand: true,
+					cwd: 'src/views/css',
+					src: '*.css',
+					dest: 'dist/views/css',
+					ext: '.min.css'
 				}]
 			}
 		},
@@ -60,7 +68,8 @@ module.exports = function(grunt) {
 		uglify: {
 			my_target: {
 				files: {
-					'dist/js/app.min.js': ['src/js/perfmatters.js']
+					'dist/js/app.min.js': ['src/js/perfmatters.js'],
+					'dist/views/js/main.js': ['src/views/js/main.js']
 				}
 			}
 		},
