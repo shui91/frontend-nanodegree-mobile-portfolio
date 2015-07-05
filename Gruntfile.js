@@ -74,6 +74,20 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		compress: {
+			main: {
+				options: {
+					mode: 'gzip'
+				},
+				files: [{
+					expand: true,
+					cwd: 'src/',
+					src: ['**/*'],
+					dest: 'dist/',
+					ext: '.gz'
+				}]
+			}
+		},
 		watch: {
 			scripts: {
 				files: ['dist/js/*.js', 'src/js/*.js'],
