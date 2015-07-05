@@ -510,8 +510,9 @@ function updatePositions() {
   for (var j = 0; j < length; j++) {
     var phase = scrolls[j % 5];
     //console.log(phase, phases);
-    items[j].style.left = items[j].basicLeft + 100 * phase + 'px';
-    //items[i].style.transform = 'translateX(' + (700 * phase) + 'px)';
+    //items[j].style.left = items[j].basicLeft + 100 * phase + 'px';
+    var Leftpos = items[j].basicLeft + 100;
+    items[j].style.transform = 'translateX(' + (Leftpos * phase) + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
