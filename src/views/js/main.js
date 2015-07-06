@@ -1,20 +1,19 @@
-/*
-Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
-jank-free at 60 frames per second.
+// Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
+// jank-free at 60 frames per second.
 
-There are two major issues in this code that lead to sub-60fps performance. Can
-you spot and fix both?
+// There are two major issues in this code that lead to sub-60fps performance. Can
+// you spot and fix both?
 
 
-Built into the code, you'll find a few instances of the User Timing API
-(window.performance), which will be console.log()ing frame rate data into the
-browser console. To learn more about User Timing API, check out:
-http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
+// Built into the code, you'll find a few instances of the User Timing API
+// (window.performance), which will be console.log()ing frame rate data into the
+// browser console. To learn more about User Timing API, check out:
+// http://www.html5rocks.com/en/tutorials/webperformance/usertiming/
 
-Creator:
-Cameron Pittman, Udacity Course Developer
-cameron *at* udacity *dot* com
-*/
+// Creator:
+// Cameron Pittman, Udacity Course Developer
+// cameron *at* udacity *dot* com
+
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
@@ -497,7 +496,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Implementation of rAF to debounce scrolling tutorial from html5rocks.com/e/tutorials/speed/animations/
 // Initialize scroll position and tick
 var lastScrollY = 0;
-var ticking = true;
+var ticking = false;
 
 function onScroll() {
   lastScrollY = window.scrollY;
