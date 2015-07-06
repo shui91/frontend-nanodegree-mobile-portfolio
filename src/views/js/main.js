@@ -444,7 +444,8 @@ var resizePizzas = function(size) {
 
       var randomPizzas = document.body.getElementsByClassName("randomPizzaContainer");
       var length = randomPizzas.length;
-
+      // removed old dx function in favour of more succinct function that changes pizza width in %
+      // pulled class selection out of loop as it only needs to be done once
       for (var i = 0; i < length; i++) {
         randomPizzas[i].style.width = newWidth + "%";
       }
@@ -499,6 +500,8 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   //select all pizzas that move, removed caculation of scrollTop outside of loop so that it's only done once
+  // var items is taken out of for loop because it only needs to be done once, leading to performance gains.
+  // removed querySelectorAll because it's more cost intensive to use than getElementsByClassName
   var items = document.getElementsByClassName('mover');
   var length = items.length;
 
@@ -533,6 +536,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var pizzaSpace = 230;
+  // replaced querySelector with getElementById for performance gains
   var movingPizzas1 = document.getElementById("movingPizzas1");
   var elem;
   for (var i = 0; i < 35; i++) {
