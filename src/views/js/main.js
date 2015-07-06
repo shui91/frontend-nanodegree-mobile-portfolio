@@ -494,8 +494,26 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+// Implementation of rAF to debounce scrolling tutorial from html5rocks.com/e/tutorials/speed/animations/
+// Initialize scroll position and tick
+var lastScrollY = 0;
+var ticking = true;
+
+function onScroll() {
+  lastScrollY = window.scrollY;
+  requestTick();
+}
+
+function requestTick() {
+  if (!ticking) {
+    requestAnimationFrame(updatePositions);
+    ticking = true;
+  }
+}
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+  ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
 
@@ -506,17 +524,17 @@ function updatePositions() {
   var length = items.length;
 
   var scrolls = [];
-  var scrollTop = document.body.scrollTop;
+  var currentScrollY = lastScrollY / 1250;
   for (var i = 0; i < 5; i++){
-    scrolls[i] = Math.sin((scrollTop / 1250) + i);
+    scrolls[i] = Math.sin(currentScrollY + i);
   }
 
-  for (var j = 0; j < length; j++) {
-    var phase = scrolls[j % 5];
+  for (i = 0; i < length; i++) {
+    var phase = scrolls[i % 5];
     //console.log(phase, phases);
     //items[j].style.left = items[j].basicLeft + 100 * phase + 'px';
-    var leftPos = items[j].basicLeft + 100;
-    items[j].style.transform = 'translateX( ' + (leftPos * phase) + 'px)';
+    var leftPos = items[i].basicLeft + 100;
+    items[i].style.transform = 'translateX( ' + (leftPos * phase) + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -530,12 +548,12 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', onScroll, updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
-  var pizzaSpace = 230;
+  var pizzaSpace = 256;
   // replaced querySelector with getElementById for performance gains
   var movingPizzas1 = document.getElementById("movingPizzas1");
   var elem;
@@ -543,10 +561,11 @@ document.addEventListener('DOMContentLoaded', function() {
     elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
+    // group all the styles together
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * pizzaSpace;
     elem.style.top = (Math.floor(i / cols) * pizzaSpace) + 'px';
+    elem.basicLeft = (i % cols) * pizzaSpace;
     movingPizzas1.appendChild(elem);
   }
   updatePositions();
