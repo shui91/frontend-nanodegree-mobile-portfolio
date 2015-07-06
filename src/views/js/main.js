@@ -502,8 +502,8 @@ function updatePositions() {
   var items = document.getElementsByClassName('mover');
   var length = items.length;
 
-  var scrollTop = document.body.scrollTop;
   var scrolls = [];
+  var scrollTop = document.body.scrollTop;
   for (var i = 0; i < 5; i++){
     scrolls[i] = Math.sin((scrollTop / 1250) + i);
   }
