@@ -33,9 +33,13 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  /* added transforms and backface-visbility to enable hardware acceleration
+  also included -webkit- versions to ensure all browsers are able to handle this */
   -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+  -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transform: translateZ(0);
   backface-visibility: hidden;
 
 }
