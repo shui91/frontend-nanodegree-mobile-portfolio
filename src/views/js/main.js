@@ -491,7 +491,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // this ensures rAF only calls updatePositions on scroll, otherwise updatePositions is not run
 // Initialize scroll position and tick
 var lastScrollY = 0;
-var ticking = false;
+var ticking = true;
 
 function onScroll() {
   lastScrollY = window.scrollY;
@@ -511,22 +511,25 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  //select all pizzas that move, removed caculation of scrollTop outside of loop so that it's only done once
+ 
   // var items is taken out of for loop because it only needs to be done once, leading to performance gains.
-  // removed querySelectorAll because it's more cost intensive to use than getElementsByClassName
+  // use getElementsByClassName to select all movers instead of querySelectorAll since that has to move through entire document body
   var items = document.getElementsByClassName('mover');
   var length = items.length;
 
   var scrolls = [];
+  var phase;
+  // removed reliance on scrollTop because caching the current scroll position is much more efficient
   var currentScrollY = lastScrollY / 1250;
   for (var i = 0; i < 5; i++){
     scrolls[i] = Math.sin(currentScrollY + i);
   }
 
   for (i = 0; i < length; i++) {
-    var phase = scrolls[i % 5];
+    phase = scrolls[i % 5];
+    //phase = Math.sin(currentScrollY + (i % 5));
     //console.log(phase, phases);
-    //items[j].style.left = items[j].basicLeft + 100 * phase + 'px';
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     var leftPos = items[i].basicLeft + 100;
     items[i].style.transform = 'translateX( ' + (leftPos * phase) + 'px)';
   }
@@ -550,6 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var pizzaSpace = 256;
   // replaced querySelector with getElementById for performance gains
   var movingPizzas1 = document.getElementById("movingPizzas1");
+  // moved setting var elem out of the loop
   var elem;
   for (var i = 0; i < 35; i++) {
     elem = document.createElement('img');
