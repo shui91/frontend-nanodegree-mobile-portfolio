@@ -491,7 +491,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // this ensures rAF only calls updatePositions on scroll, otherwise updatePositions is not run
 // Initialize scroll position and tick
 var lastScrollY = 0;
-var ticking = true;
+var ticking = false;
 
 function onScroll() {
   lastScrollY = window.scrollY;
