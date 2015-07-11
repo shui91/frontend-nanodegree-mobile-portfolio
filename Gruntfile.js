@@ -57,18 +57,18 @@ module.exports = function(grunt) {
 					minifyCSS: true,
 				},
 				files: {
-					'dist/index.html': 'src/index.html',
-					'dist/project-2048.html': 'src/project-2048.html',
-					'dist/project-mobile.html': 'src/project-mobile.html',
-					'dist/project-webperf.html': 'src/project-webperf.html',
-					'dist/views/pizza.html': 'src/views/pizza.html'
+					'dist/index.html': 'src/index-ready.html',
+					'dist/project-2048.html': 'src/project-2048-ready.html',
+					'dist/project-mobile.html': 'src/project-mobile-ready.html',
+					'dist/project-webperf.html': 'src/project-webperf-ready.html',
+					'dist/views/pizza.html': 'src/views/pizza-ready.html'
 				}
 			}
 		},
 		uglify: {
 			my_target: {
 				files: {
-					'dist/js/app.min.js': ['src/js/perfmatters.js'],
+					'dist/js/perfmatters.min.js': ['src/js/perfmatters.js'],
 					'dist/views/js/main.js': ['src/views/js/main.js']
 				}
 			}
@@ -95,6 +95,24 @@ module.exports = function(grunt) {
 					dest: 'dist/',
 					ext: '.gz'
 				}]
+			}
+		},
+		processhtml: {
+			dist: {
+				options: {
+					data: {
+						title: "Mobile Optimization Project",
+						message: "This is the production distribution"
+					}
+				},
+				files: {
+					'src/index-ready.html' : ['src/index.html'],
+					'src/project-mobile-ready.html' : ['src/project-mobile.html'],
+					'src/project-webperf-ready.html' : ['src/project-webperf.html'],
+					'src/project-2048-ready.html' : ['src/project-2048.html'],
+					'src/views/pizza-ready.html' : ['src/views/pizza.html']
+				}
+
 			}
 		},
 		watch: {
@@ -133,6 +151,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('minify', [
+		'processhtml',
 		'htmlmin',
 		'cssmin',
 		'uglify',
