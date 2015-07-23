@@ -1,10 +1,11 @@
-Webpage Optimization Project - Sherman Hui
+# Webpage Optimization Project - Sherman Hui
 
 ** FOR UDACITY CODE REVIEWERS: For Pagespeed Insight Test and Timeline Tests - USE dist/index.html and dist/views/pizza.html **
 
 ** FOR UDACITY CODE REVIEWERS: If code review is needed; use html files in src/ to review un-uglified code, BUT the css won't be applied correctly because the JS in perfmatters.js that loads the CSS files after pageload uses "style.min.css", remove .min to have the src code work correctly for review **
 
--- Pagespeed Insight Optimizations --
+## Pagespeed Insight Optimizations
+----------------------------------
 
 Sat. Jul 11/2015 Mobile: [Pagespeed Score: 93/100, User Experience: 100/100], Desktop: [Pagespeed Score: 95/100, User Experience 100/100]
 
@@ -19,7 +20,8 @@ Sat. Jul 11/2015 Mobile: [Pagespeed Score: 93/100, User Experience: 100/100], De
 9. Using grunt, minimized and optimized all photo assets
 10. Moved Analytics into perfmatters.js because it isn't a critical asset and improves pagespeed
 
--- 60FPS Optimizations -- 
+## 60FPS Optimizations
+----------------------
 
 1. As per inclass instructions removed old dx function in favour of more succinct function that changes pizza width with respect to %
 2. Removed class selections from within loops, as it only needs to be done once.
